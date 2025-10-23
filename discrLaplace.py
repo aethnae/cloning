@@ -33,8 +33,8 @@ def visual(N: int, M: int) -> None:
     plt.figure(figsize=(9,7))
     plt.imshow(res.toarray())
     plt.colorbar(label="Wert")
-    plt.title(f"Vektorisierter Laplace-Operator Δ für (N,M) = ({N},{M})")
+    plt.title(f"Vectorised Laplace operator Δ for image of size = ({N},{M})")
     plt.show()
     return None
 
-# print(visual(5,7))
+print(visual(5,7))
