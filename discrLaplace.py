@@ -37,4 +37,4 @@ def visual(N: int, M: int) -> None:
     plt.show()
     return None
 
-print(visual(5,7))
+# print(visual(5,7))
