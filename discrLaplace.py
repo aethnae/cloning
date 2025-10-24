@@ -14,6 +14,25 @@ def discrLaplace1D(size: int) -> csc_matrix:
     result = diags([sub, main, top], [-1, 0, 1], shape=(size, size), format="csc")
     return result
 
+
+def discrForwardDiff1D(size: int) -> csc_matrix:
+    main = -1 * np.ones(size)
+    top = np.ones(size - 1)
+
+    main[-1] = -1.0
+
+    result = diags([main, top], [0, 1], shape=(size, size), format='csc')
+    return result
+
+def discrBackwardDiff1D(size: int) -> csc_matrix:
+    main = np.ones(size)
+    sub_diag = -1 * np.ones(size - 1)
+
+    main[0] = 1.0
+
+    result = diags([sub_diag, main], [-1, 0], shape=(size, size), format='csc')
+    return result
+
 def discrLaplace2D(N: int, M: int) -> csc_matrix:
     """
     Computes the vectorized discrete Laplace operator Δ = (I_M ⊗ D_N^(2) + D_M^(2) ⊗ I_N)
@@ -36,5 +55,3 @@ def visual(N: int, M: int) -> None:
     plt.title(f"Vectorised Laplace operator Δ for image of size = ({N},{M})")
     plt.show()
     return None
-
-# print(visual(5,7))
