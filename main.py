@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     plane_resized_float = resize(plane,(plane.shape[0] // 2, plane.shape[1] // 2), anti_aliasing=True)
     plane_small = util.img_as_ubyte(plane_resized_float)
-    print(f"Neue Flugzeug-Maße: {plane_small.shape}")
+    print(f"Downsized Airplane: {plane_small.shape}")
 
     pos_plane_x, pos_plane_y = 400, 60
     res_plane_naive = process_RGB(clone_naive, bird, plane_small, pos_plane_y, pos_plane_x)
