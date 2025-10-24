@@ -43,7 +43,7 @@ def clone_mixed(f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> n
 
     A_csc = A.tocsc()
     vec_g = g.flatten('F')
-    vec_h, info = cg(A_csc, b, x0=vec_g)
+    vec_h, info = cg(A_csc, b, x0=vec_f, maxiter=1000)
     h_region = vec_h.reshape((N, M), order='F')
     h_region = np.clip(h_region, 0.0, 1.0)
 
