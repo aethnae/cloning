@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.sparse.linalg import cg
+
 from discrLaplace import discrLaplace2D, discrBackwardDiff1D, discrForwardDiff1D
+
 
 def clone_mixed(f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> np.ndarray:
     N, M = g.shape
@@ -42,7 +44,6 @@ def clone_mixed(f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> n
         b[k] = vec_f[k]
 
     A_csc = A.tocsc()
-    vec_g = g.flatten('F')
     vec_h, info = cg(A_csc, b, x0=vec_f, maxiter=1000)
     h_region = vec_h.reshape((N, M), order='F')
     h_region = np.clip(h_region, 0.0, 1.0)

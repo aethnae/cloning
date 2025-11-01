@@ -1,16 +1,20 @@
-import numpy as np
+from typing import Callable
+
 import matplotlib.pyplot as plt
+import numpy as np
 from skimage import io, util
 from skimage.transform import resize
-from typing import Callable
+
 from cloneGrayscale import clone_grayscale
 from cloneMixed import clone_mixed
+
 
 def clone_naive(f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> np.ndarray:
     N, M = g.shape
     res = f.copy()
     res[target_y : target_y + N, target_x : target_x + M] = g
     return res
+
 
 def process_RGB(cloning: Callable, f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> np.ndarray:
     f_float = util.img_as_float(f)
@@ -27,6 +31,7 @@ def process_RGB(cloning: Callable, f: np.ndarray, g: np.ndarray, target_y: int, 
     img_i = util.img_as_ubyte(img_f)
     return img_i
 
+
 if __name__ == "__main__":
     try:
         bear = io.imread("Resources/Images/bear.jpg")
@@ -34,10 +39,10 @@ if __name__ == "__main__":
         plane = io.imread("Resources/Images/plane.jpg")
         bird = io.imread("Resources/Images/bird.jpg")
         print("Read Images.")
-        print(f"Size Bear:   {bear.shape}")
+        print(f"Size Bear: {bear.shape}")
         print(f"Size Water: {water.shape}")
         print(f"Size Airplane: {plane.shape}")
-        print(f"Size Bird:  {bird.shape}")
+        print(f"Size Bird: {bird.shape}")
     except FileNotFoundError as e:
         print(f"ERROR: Source path not found.")
         print(f"({e})")
