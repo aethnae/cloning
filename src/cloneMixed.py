@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.sparse.linalg import cg
 
-from discrLaplace import create_2d_laplacian, create_backward_diff, create_forward_diff
+from .discrLaplace import create_2d_laplacian, create_backward_diff, create_forward_diff
 
 
 def clone_mixed(f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> np.ndarray:

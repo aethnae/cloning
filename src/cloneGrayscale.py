@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.sparse.linalg import cg
-from discrLaplace import create_2d_laplacian
+from .discrLaplace import create_2d_laplacian
 
 def clone_grayscale(f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> np.ndarray:
     """
