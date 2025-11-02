@@ -10,7 +10,9 @@ from src.cloneMixed import clone_mixed
 from src.discrLaplace import visual
 
 
-def clone_naive(f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> np.ndarray:
+def clone_naive(
+    f: np.ndarray, g: np.ndarray, target_y: int, target_x: int
+) -> np.ndarray:
     """
     Naively clones patch g into target image f at given location without further conditions.
 
@@ -26,7 +28,9 @@ def clone_naive(f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> n
     return res
 
 
-def process_RGB(cloning: Callable, f: np.ndarray, g: np.ndarray, target_y: int, target_x: int) -> np.ndarray:
+def process_RGB(
+    cloning: Callable, f: np.ndarray, g: np.ndarray, target_y: int, target_x: int
+) -> np.ndarray:
     """
     Splits RGB target and patch into separate grayscale channels and seamlessly clones at given coordinates.
     Also allows choice of naive gradient or mixed gradient approach.
@@ -62,10 +66,10 @@ if __name__ == "__main__":
     visual(5, 7)
 
     try:
-        bear = io.imread("Resources/Images/bear.jpg")
-        water = io.imread("Resources/Images/water.jpg")
-        plane = io.imread("Resources/Images/plane.jpg")
-        bird = io.imread("Resources/Images/bird.jpg")
+        bear = io.imread("Images/bear.jpg")
+        water = io.imread("Images/water.jpg")
+        plane = io.imread("Images/plane.jpg")
+        bird = io.imread("Images/bird.jpg")
         print("Read Images.")
         print(f"Size Bear: {bear.shape}")
         print(f"Size Water: {water.shape}")
@@ -83,43 +87,51 @@ if __name__ == "__main__":
     res_bear_mixed = process_RGB(clone_mixed, water, bear, pos_bear_y, pos_bear_x)
 
     # resizing plane.jpg due to extreme size difference resulting in slow cg-method
-    plane_resized_float = resize(plane,(plane.shape[0] // 2, plane.shape[1] // 2), anti_aliasing=True)
+    plane_resized_float = resize(
+        plane, (plane.shape[0] // 2, plane.shape[1] // 2), anti_aliasing=True
+    )
     plane_small = util.img_as_ubyte(plane_resized_float)
     print(f"Downsized Airplane: {plane_small.shape}")
 
     # clone plane next to bird
     pos_plane_x, pos_plane_y = 400, 60
-    res_plane_naive = process_RGB(clone_naive, bird, plane_small, pos_plane_y, pos_plane_x)
-    res_plane_laplace = process_RGB(clone_grayscale, bird, plane_small, pos_plane_y, pos_plane_x)
-    res_plane_mixed = process_RGB(clone_mixed, bird, plane_small, pos_plane_y, pos_plane_x)
-
+    res_plane_naive = process_RGB(
+        clone_naive, bird, plane_small, pos_plane_y, pos_plane_x
+    )
+    res_plane_laplace = process_RGB(
+        clone_grayscale, bird, plane_small, pos_plane_y, pos_plane_x
+    )
+    res_plane_mixed = process_RGB(
+        clone_mixed, bird, plane_small, pos_plane_y, pos_plane_x
+    )
 
     # visualize results
     fig, axes = plt.subplots(2, 3, figsize=(18, 12))
 
     axes[0, 0].imshow(res_bear_naive)
     axes[0, 0].set_title("Bear: Naive approach")
-    axes[0, 0].axis('off')
+    axes[0, 0].axis("off")
 
     axes[0, 1].imshow(res_bear_laplace)
     axes[0, 1].set_title("Bear: Laplace approach")
-    axes[0, 1].axis('off')
+    axes[0, 1].axis("off")
 
     axes[0, 2].imshow(res_bear_mixed)
     axes[0, 2].set_title("Bear: Mixed gradients")
-    axes[0, 2].axis('off')
+    axes[0, 2].axis("off")
 
     axes[1, 0].imshow(res_plane_naive)
     axes[1, 0].set_title("Airplane: Naive approach")
-    axes[1, 0].axis('off')
+    axes[1, 0].axis("off")
 
     axes[1, 1].imshow(res_plane_laplace)
     axes[1, 1].set_title("Airplane: Laplace approach")
-    axes[1, 1].axis('off')
+    axes[1, 1].axis("off")
 
     axes[1, 2].imshow(res_plane_mixed)
     axes[1, 2].set_title("Airplane: Mixed gradients")
-    axes[1, 2].axis('off')
+    axes[1, 2].axis("off")
 
     plt.tight_layout()
     plt.show()
+
