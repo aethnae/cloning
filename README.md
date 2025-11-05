@@ -1,5 +1,7 @@
 ## Seamless Cloning | Numerik (WS 25/26)
 
+(Von Kleindopf, Johann (0503695), Leipnitz, Sten (510613) und Ulrich, Daniel (327997))
+
 Implementation of [Poisson Image Editing](https://en.wikipedia.org/wiki/Gradient-domain_image_processing) in Python.
 Dependencies include *numpy* and *scipy* for conjugate gradients, *scikit-image* for file-reading and *matplotlib* for
 visualization.
